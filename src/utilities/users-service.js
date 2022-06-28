@@ -2,6 +2,7 @@
 // This syntax can be helpful documenting where the methods come from 
 import { token } from 'morgan'
 import * as usersAPI from './users-api'
+import * as LoginForm from '../components/LoginForm/LoginForm'
 
 export async function signUp(userData) {
   // Delegate the network request code to the users-api.js API module
@@ -11,6 +12,14 @@ export async function signUp(userData) {
   localStorage.setItem('token', token)
   return getUser();
 } 
+
+// DATA WE GET BACK FROM THE FETCH REQUEST IN USERS-API LOGIN FUNCTION
+// DATA WILL BE RETURNED FROM THE SERVER, THEN TOKEN IT SET FOR USER LOGIN
+export async function login(credentials) {
+  const token = await usersAPI.login(credentials)
+  localStorage.setItem('token', token)
+  return getUser();
+}
 
 export function getToken() {
   // getItem return null if there's no string
@@ -32,3 +41,12 @@ export function getUser() {
    // If there's a token, return the user in the payload, otherwise return null
   return token ? JSON.parse(atob(token.split('.')[1])).user : null
 }
+
+export function logOut() {
+  localStorage.removeItem('token');
+}
+
+export function checkToken() {
+  alert('clicked')
+}
+

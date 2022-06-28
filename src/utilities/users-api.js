@@ -20,4 +20,35 @@ export async function signUp(userData) {
   }
 }
 
+// SENDING DATA TO EXPRESS SERVER FROM THE FRONT END
+// THIS DATA GOES TO SERVER
+export async function login(credentials) {
+  const res = await fetch(`${BASE_URL}/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(credentials)
+  })
+  if (res.ok) {
+      return res.json()
+  } else {
+      throw new Error('Invalid User/Login')
+  }
+}
+
+// HELPER FUNCTIONS
+
+async function sendRequest(url, method = 'GET', payload = null) {
+  // Fetch accepts an options object as the 2nd argument
+  // used to include a data payload, set headers, etc. 
+  const options = { method }
+  if (payload) {
+    options.header = { 'Content-Type': 'application/json' }
+    options.body = JSON.stringify(payload)
+  }
+  const res = await fetch(url, options)
+  // res.ok will be false if the status code set to 4xx in the controller action
+  if (res.ok) return res.json();
+  throw new Error('Bad Request');
+}
+
 
