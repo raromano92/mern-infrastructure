@@ -14,7 +14,7 @@ export async function signUp(userData) {
 } 
 
 // DATA WE GET BACK FROM THE FETCH REQUEST IN USERS-API LOGIN FUNCTION
-// DATA WILL BE RETURNED FROM THE SERVER, THEN TOKEN IT SET FOR USER LOGIN
+// DATA WILL BE RETURNED FROM THE SERVER, THEN TOKEN THAT IT SET FOR USER LOGIN
 export async function login(credentials) {
   const token = await usersAPI.login(credentials)
   localStorage.setItem('token', token)

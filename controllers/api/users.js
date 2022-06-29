@@ -1,7 +1,6 @@
 const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
-const { rawListeners } = require('../../models/user');
 
 module.exports = {
   create,
